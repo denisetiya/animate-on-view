@@ -1,6 +1,6 @@
 {
   "name": "animate-on-view",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "type": "module",
   "description": "A lightweight React library for scroll-based animations",
   "main": "dist/cjs/index.js",

@@ -1,3 +1,18 @@
+# 1.0.0 (2025-07-30)
+
+
+### Bug Fixes
+
+* update commitlint and release config for semantic-release compatibility ([b3119bc](https://github.com/denisetiya/animate-on-view/commit/b3119bcdb8f9b27230541329fb8f5b30c8242e2f))
+
+
+### Features
+
+* initial commit ([4c28ad8](https://github.com/denisetiya/animate-on-view/commit/4c28ad80c1dbc7359345e38c1ce4eb6947ca61f4))
+* initial release setup ([8296540](https://github.com/denisetiya/animate-on-view/commit/8296540323c3f1d9ee5b313e37a2c111a2e263ea))
+* upadate ci/cd ([84c2f0e](https://github.com/denisetiya/animate-on-view/commit/84c2f0e1fea780a7263c64f0244beb927c224b53))
+* update ci/cd ([d817274](https://github.com/denisetiya/animate-on-view/commit/d817274eea9b26bc7599bb7ff0589f06c1e8adbf))
+
 # Changelog
 
 All notable changes to this project will be documented in this file.
