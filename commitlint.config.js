@@ -18,5 +18,10 @@ export default {
         'test',
       ],
     ],
+    'body-max-line-length': [2, 'always', 100],
   },
+  ignores: [
+    (message) => message.includes('chore(release):'),
+    (message) => message.includes('[skip ci]'),
+  ],
 };
