@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Scroll Animation Library - Interactive Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease-out 0.5s forwards;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease-out 1s forwards;
+        }
+
+        .section {
+            padding: 100px 0;
+            background: white;
+        }
+
+        .section:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #2c3e50;
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .demo-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+
+        .demo-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .demo-card h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .demo-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #5a6fd8;
+        }
+
+        .code-example {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            overflow-x: auto;
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s ease;
+        }
+
+        .code-example.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .code-example pre {
+            margin: 0;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9rem;
+        }
+
+        .animation-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .animation-demo {
+            height: 200px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .animation-demo:hover {
+            transform: scale(1.05);
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .fade-in.animate {
+            opacity: 1;
+        }
+
+        .slide-up {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+
+        .slide-up.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-left {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.6s ease;
+        }
+
+        .slide-left.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .zoom-in {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.6s ease;
+        }
+
+        .zoom-in.animate {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .flip-x {
+            opacity: 0;
+            transform: rotateX(-90deg);
+            transition: all 0.6s ease;
+        }
+
+        .flip-x.animate {
+            opacity: 1;
+            transform: rotateX(0);
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #667eea;
+            display: block;
+        }
+
+        .stat-label {
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 3rem auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #667eea;
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin: 2rem 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .timeline-item.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            width: 45%;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: 55%;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-right: 55%;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 20px;
+            height: 20px;
+            background: #667eea;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            border: 4px solid white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .timeline::before {
+                left: 20px;
+            }
+            
+            .timeline-content {
+                width: calc(100% - 60px);
+                margin-left: 60px !important;
+                margin-right: 0 !important;
+            }
+            
+            .timeline-marker {
+                left: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="container">
+            <h1>React Scroll Animation Library</h1>
+            <p>Performant, accessible, and easy-to-use scroll animations for React</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <h2>Animation Types</h2>
+            <div class="animation-showcase">
+                <div class="animation-demo fade-in" data-animation="fade">
+                    Fade In
+                </div>
+                <div class="animation-demo slide-up" data-animation="slide-up">
+                    Slide Up
+                </div>
+                <div class="animation-demo slide-left" data-animation="slide-left">
+                    Slide Left
+                </div>
+                <div class="animation-demo zoom-in" data-animation="zoom">
+                    Zoom In
+                </div>
+                <div class="animation-demo flip-x" data-animation="flip">
+                    Flip X
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <h2>Code Examples</h2>
+            
+            <div class="code-example">
+                <pre><code>// Basic Usage
+import { AnimateOnView } from 'animate-on-view';
+
+function App() {
+  return (
+    &lt;AnimateOnView type="fade"&gt;
+      &lt;h1&gt;This will fade in when scrolled into view&lt;/h1&gt;
+    &lt;/AnimateOnView&gt;
+  );
+}</code></pre>
+            </div>
+
+            <div class="code-example">
+                <pre><code>// Advanced Usage with Hooks
+import { useScrollAnimation } from 'animate-on-view';
+
+function MyComponent() {
+  const { ref, isVisible, trigger, reset } = useScrollAnimation({
+    type: 'slide',
+    direction: 'up',
+    duration: 800
+  });
+
+  return (
+    &lt;div ref={ref}&gt;
+      &lt;p&gt;Visible: {isVisible ? 'Yes' : 'No'}&lt;/p&gt;
+      &lt;button onClick={trigger}&gt;Trigger Animation&lt;/button&gt;
+      &lt;button onClick={reset}&gt;Reset Animation&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+            </div>
+
+            <div class="code-example">
+                <pre><code>// Staggered Animations
+const items = ['Item 1', 'Item 2', 'Item 3'];
+
+function StaggeredList() {
+  return (
+    &lt;div&gt;
+      {items.map((item, index) =&gt; (
+        &lt;AnimateOnView
+          key={index}
+          type="slide"
+          direction="up"
+          delay={index * 200}
+        &gt;
+          &lt;div&gt;{item}&lt;/div&gt;
+        &lt;/AnimateOnView&gt;
+      ))}
+    &lt;/div&gt;
+  );
+}</code></pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <h2>Features</h2>
+            <div class="demo-grid">
+                <div class="demo-card">
+                    <h3>🚀 Performant</h3>
+                    <p>Uses Intersection Observer API for efficient scroll detection without performance overhead.</p>
+                </div>
+                <div class="demo-card">
+                    <h3>📦 Lightweight</h3>
+                    <p>Under 15KB gzipped bundle size with zero dependencies for optimal loading speed.</p>
+                </div>
+                <div class="demo-card">
+                    <h3>♿ Accessible</h3>
+                    <p>Automatically respects user motion preferences and provides accessible defaults.</p>
+                </div>
+                <div class="demo-card">
+                    <h3>🔧 TypeScript</h3>
+                    <p>Full TypeScript support with comprehensive type definitions out of the box.</p>
+                </div>
+                <div class="demo-card">
+                    <h3>🌐 SSR Ready</h3>
+                    <p>Compatible with Next.js and other SSR frameworks without hydration issues.</p>
+                </div>
+                <div class="demo-card">
+                    <h3>🎯 Modern React</h3>
+                    <p>Built with hooks and functional components following React best practices.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <h2>Performance Stats</h2>
+            <div class="stats">
+                <div class="stat">
+                    <span class="stat-number" data-target="15">0</span>
+                    <div class="stat-label">KB Gzipped</div>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" data-target="60">0</span>
+                    <div class="stat-label">FPS Maintained</div>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" data-target="0">0</span>
+                    <div class="stat-label">Dependencies</div>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" data-target="100">0</span>
+                    <div class="stat-label">% TypeScript</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <h2>Development Timeline</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Project Setup</h3>
+                        <p>Initialize TypeScript project with optimized build configuration and testing setup.</p>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Core Implementation</h3>
+                        <p>Build core animation system with Intersection Observer and CSS transforms.</p>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>React Integration</h3>
+                        <p>Create React components and hooks with full TypeScript support.</p>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>SSR Compatibility</h3>
+                        <p>Add server-side rendering support and Next.js compatibility.</p>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Testing & Optimization</h3>
+                        <p>Comprehensive testing suite and performance optimizations.</p>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Documentation</h3>
+                        <p>Complete API documentation, examples, and troubleshooting guides.</p>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <h2>Get Started</h2>
+            <div style="text-align: center;">
+                <div class="code-example" style="display: inline-block; text-align: left;">
+                    <pre><code>npm install animate-on-view</code></pre>
+                </div>
+                <br><br>
+                <a href="#" class="btn">View Documentation</a>
+                <a href="#" class="btn" style="margin-left: 1rem;">GitHub Repository</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animatable elements
+        document.addEventListener('DOMContentLoaded', () => {
+            const animatableElements = document.querySelectorAll(
+                '.demo-card, .code-example, .fade-in, .slide-up, .slide-left, .zoom-in, .flip-x, .timeline-item'
+            );
+            
+            animatableElements.forEach(el => {
+                observer.observe(el);
+            });
+
+            // Animated counters
+            const counters = document.querySelectorAll('.stat-number');
+            const counterObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const target = parseInt(entry.target.dataset.target);
+                        animateCounter(entry.target, target);
+                        counterObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            counters.forEach(counter => {
+                counterObserver.observe(counter);
+            });
+
+            // Animation demo click handlers
+            const animationDemos = document.querySelectorAll('.animation-demo');
+            animationDemos.forEach(demo => {
+                demo.addEventListener('click', () => {
+                    demo.classList.remove('animate');
+                    setTimeout(() => {
+                        demo.classList.add('animate');
+                    }, 100);
+                });
+            });
+        });
+
+        function animateCounter(element, target) {
+            let current = 0;
+            const increment = target / 60; // 60 frames for smooth animation
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                element.textContent = Math.floor(current);
+            }, 16); // ~60fps
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
