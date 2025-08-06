@@ -1,6 +1,6 @@
 {
   "name": "animate-on-view",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "type": "module",
   "description": "High-performance, zero-dependency animation library for React/Next.js and Svelte with TypeScript support",
   "main": "dist/index.js",
