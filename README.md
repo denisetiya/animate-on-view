@@ -6,6 +6,9 @@ A high-performance, zero-dependency animation library for React/Next.js and Svel
 [![Bundle Size](https://img.shields.io/bundlephobia/minzip/animate-on-view)](https://bundlephobia.com/package/animate-on-view)
 [![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-%230074c1.svg)](http://www.typescriptlang.org/)
 
+
+🌐 **[Click Here to see Demo](https://animate-on-view.vercel.app/)**  
+
 ## Features
 
 - 🚀 **Zero Dependencies** - No external libraries required

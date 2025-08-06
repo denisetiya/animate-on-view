@@ -6,6 +6,8 @@ Library animasi berperforma tinggi tanpa dependensi untuk React/Next.js dan Svel
 [![Bundle Size](https://img.shields.io/bundlephobia/minzip/animate-on-view)](https://bundlephobia.com/package/animate-on-view)
 [![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-%230074c1.svg)](http://www.typescriptlang.org/)
 
+🌐 **[Klik di sini untuk membuka demo](https://animate-on-view.vercel.app/)**  
+
 ## Fitur
 
 - 🚀 **Tanpa Dependensi** - Tidak memerlukan library eksternal
