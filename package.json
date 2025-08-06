@@ -1,0 +1,102 @@
+{
+  "name": "animate-on-view",
+  "version": "1.0.2",
+  "type": "module",
+  "description": "High-performance, zero-dependency animation library for React/Next.js and Svelte with TypeScript support",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./react": {
+      "import": "./dist/react/index.esm.js",
+      "require": "./dist/react/index.js",
+      "types": "./dist/react/index.d.ts"
+    },
+    "./svelte": {
+      "import": "./dist/svelte/index.esm.js",
+      "require": "./dist/svelte/index.js",
+      "types": "./dist/svelte/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "npm run build:react && npm run build:svelte",
+    "build:react": "rollup -c rollup.react.config.js",
+    "build:svelte": "rollup -c rollup.svelte.config.js",
+    "dev": "rollup -c -w",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src --ext .ts,.tsx,.svelte",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "animation",
+    "react",
+    "nextjs",
+    "svelte",
+    "typescript",
+    "intersection-observer",
+    "scroll-animation",
+    "aos",
+    "animate-on-scroll",
+    "performance",
+    "zero-dependency"
+  ],
+  "author": "Deni Setiya",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "svelte": ">=4.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "svelte": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.0",
+    "@rollup/plugin-typescript": "^11.0.0",
+    "@types/react": "^18.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0",
+    "eslint-plugin-svelte": "^2.0.0",
+    "rollup": "^3.0.0",
+    "rollup-plugin-dts": "^6.0.0",
+    "rollup-plugin-svelte": "^7.0.0",
+    "svelte": "^5.0.0",
+    "svelte-check": "^3.0.0",
+    "svelte-preprocess": "^6.0.3",
+    "tslib": "^2.8.1",
+    "typescript": "^5.0.0",
+    "vitest": "^1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/denisetiya/animate-on-view.git"
+  },
+  "bugs": {
+    "url": "https://github.com/denisetiya/animate-on-view/issues"
+  },
+  "homepage": "https://github.com/denisetiya/animate-on-view#readme",
+  "size-limit": [
+    {
+      "path": "dist/index.esm.js",
+      "limit": "5 KB"
+    }
+  ]
+}
