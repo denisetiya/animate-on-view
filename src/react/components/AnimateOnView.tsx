@@ -113,20 +113,20 @@ const createAnimateElement = <T extends keyof JSX.IntrinsicElements>(tag: T) => 
     return forwardRef<any, BaseAnimateProps & JSX.IntrinsicElements[T]>(
         (props, ref) => {
             const { children, ...restProps } = props as any;
-            const { 
-                type, 
-                variant, 
-                threshold, 
-                rootMargin, 
-                triggerOnce, 
-                duration, 
-                delay, 
-                easing, 
-                className, 
-                style, 
-                onInView, 
-                onOutView, 
-                ...elementProps 
+            const {
+                type,
+                variant,
+                threshold,
+                rootMargin,
+                triggerOnce,
+                duration,
+                delay,
+                easing,
+                className,
+                style,
+                onInView,
+                onOutView,
+                ...elementProps
             } = restProps;
 
             const animateProps: AnimateProps = {
@@ -172,4 +172,6 @@ export const animate = {
     ul: createAnimateElement('ul'),
     ol: createAnimateElement('ol'),
     li: createAnimateElement('li'),
+    button: createAnimateElement('button'),
+    input: createAnimateElement('input'),
 };
