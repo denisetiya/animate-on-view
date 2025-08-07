@@ -7,17 +7,9 @@ export const createTransitionString = (
     duration: number,
     delay: number,
     easing: string
-  ): string => {
-    const properties = ['opacity', 'transform'];
-    return properties
-      .map(prop => `${prop} ${duration}ms ${easing} ${delay}ms`)
-      .join(', ');
-  };
+  ): string => `opacity ${duration}ms ${easing} ${delay}ms, transform ${duration}ms ${easing} ${delay}ms`;
   
   export const mergeStyles = (
     baseStyle: React.CSSProperties,
     userStyle?: React.CSSProperties
-  ): React.CSSProperties => ({
-    ...baseStyle,
-    ...userStyle,
-  });
+  ): React.CSSProperties => userStyle ? { ...baseStyle, ...userStyle } : baseStyle;

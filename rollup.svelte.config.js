@@ -4,6 +4,7 @@ import typescript from '@rollup/plugin-typescript';
 import svelte from 'rollup-plugin-svelte';
 import sveltePreprocess from 'svelte-preprocess';
 import dts from 'rollup-plugin-dts';
+import terser from '@rollup/plugin-terser';
 
 const external = ['svelte', 'svelte/store'];
 
@@ -21,6 +22,7 @@ const config = [
       svelte({
         compilerOptions: {
           dev: false,
+          css: 'external',
         },
         preprocess: sveltePreprocess({
           typescript: true,
@@ -29,11 +31,21 @@ const config = [
       resolve({
         browser: true,
         dedupe: ['svelte'],
+        preferBuiltins: false,
+        exportConditions: ['svelte'],
       }),
       commonjs(),
       typescript({
         tsconfig: './tsconfig.json',
         declaration: false,
+        importHelpers: true,
+      }),
+      terser({
+        compress: {
+          drop_console: true,
+          drop_debugger: true,
+          pure_funcs: ['console.log'],
+        },
       }),
     ],
   },
@@ -50,6 +62,7 @@ const config = [
       svelte({
         compilerOptions: {
           dev: false,
+          css: 'external',
         },
         preprocess: sveltePreprocess({
           typescript: true,
@@ -58,11 +71,21 @@ const config = [
       resolve({
         browser: true,
         dedupe: ['svelte'],
+        preferBuiltins: false,
+        exportConditions: ['svelte'],
       }),
       commonjs(),
       typescript({
         tsconfig: './tsconfig.json',
         declaration: false,
+        importHelpers: true,
+      }),
+      terser({
+        compress: {
+          drop_console: true,
+          drop_debugger: true,
+          pure_funcs: ['console.log'],
+        },
       }),
     ],
   },
@@ -78,6 +101,7 @@ const config = [
       svelte({
         compilerOptions: {
           dev: false,
+          css: 'external',
         },
         preprocess: sveltePreprocess({
           typescript: true,

@@ -1,6 +1,6 @@
 {
   "name": "animate-on-view",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "type": "module",
   "description": "High-performance, zero-dependency animation library for React/Next.js and Svelte with TypeScript support",
   "main": "dist/index.js",
@@ -69,6 +69,7 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.0",
     "@rollup/plugin-node-resolve": "^15.0.0",
+    "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^11.0.0",
     "@types/react": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
